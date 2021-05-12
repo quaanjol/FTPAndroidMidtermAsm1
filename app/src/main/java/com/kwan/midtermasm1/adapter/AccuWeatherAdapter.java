@@ -46,7 +46,15 @@ public class AccuWeatherAdapter extends RecyclerView.Adapter {
         AccuWeatherHourlyTwelve model = list.get(position);
         hd.tvHour.setText(convertTime(model.getDateTime()));
         hd.tvTemp.setText(String.valueOf(model.getTemperature().getValue()));
-        Glide.with(activity).load("https://developer.accuweather.com/sites/default/files/16-s.png").into(hd.ivIcon);
+        if(model.getIconPhrase().toLowerCase().contains("nắng")) {
+            Glide.with(activity).load("https://i.imgur.com/om38P0E.png").into(hd.ivIcon);
+        } else if(model.getIconPhrase().toLowerCase().contains("mây")) {
+            Glide.with(activity).load("https://i.imgur.com/oBhIIgx.png").into(hd.ivIcon);
+        } else if(model.getIconPhrase().toLowerCase().contains("mưa")) {
+            Glide.with(activity).load("https://i.imgur.com/5EDbRn8.png").into(hd.ivIcon);
+        } else {
+            Glide.with(activity).load("https://i.imgur.com/om38P0E.png").into(hd.ivIcon);
+        }
     }
 
     @Override
